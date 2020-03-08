@@ -1,0 +1,47 @@
+<html>
+<body>
+<pre>
+Hello VM.
+
+## 使用 Controller 传递过来的变量 value1
+## 变量写 $!{} 和直接 $ 的区别是：变量不存在/为空的情况下，有感叹号的不会显示；而直接$符的会把 "$map" 直接作为文本显示出来
+$map
+$!{colors}
+
+## foreach 循环语句 (循环里可以使用变量 $!{foreach.index} 和 $!{foreach.count} 获取当前循环数和总循环数)
+#foreach($color in $colors)
+Color $!{foreach.index}/$!{foreach.count}: $!{color}
+#end
+
+## 甚至对于类来说，模板语言也支持 Java 里的各种方法
+#foreach($key in $!{map.keySet()})
+Num $!{foreach.index}/$!{foreach.count}: $key - $map.get($key)
+#end
+
+#foreach($kv in $!{map.entrySet()})
+kv $!{foreach.index}/$!{foreach.count}: $kv
+#end
+
+$!{user.getNameScore()}
+
+##模板页面的包含 include方式：直接替代文本；parse方式：替代文本并解析其中的变量
+#set($title = "psw")    ##设置变量 title ，在 header.vm 中用到这个变量
+#include("header.vm") <br>
+#parse("header.vm")
+
+##定义、调用函数 macro
+#macro (fun1, $name, $score)
+MACRO: $name, $score
+#end
+#fun1($user.getName(), $user.getScore())
+
+##定义变量也可以直接把已有变量拿来用（仅限双引号，单引号内不会解析）
+#set($hello = "hello")
+#set($hworld1 = "$!{hello} world")
+#set($hworld2 = '$!{hello} world')
+
+hworld1:$hworld1
+hworld2:$hworld2
+</pre>
+</body>
+</html>
