@@ -13,76 +13,70 @@
 
 </head>
 <body>
-    <header id="header" class="header">
-        <div class="header-inner">
-            <div class="site-brand-wrapper">
-                <div class="site-meta ">
-                    <div class="custom-logo-site-title">
-                        <a href="/" class="brand" rel="start">
-                            <span class="logo-line-before"><i></i></span>
-                            <span class="site-title">留言板</span>
-                            <span class="logo-line-after"><i></i></span>
-                        </a>
-                    </div>
-                    <p class="site-subtitle"></p>
+<header class="navbar navbar-default navbar-static-top bs-docs-nav" id="top" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/board" class="navbar-brand logo">留言板</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav navbar-right">
+                <li class=""><a href="http://www.psw.life">主页</a></li>
+                #if ($user)
+                <li class="js-login"><a href="javascript:void(0);">$!{user.name}</a></li>
+                #else
+                <li class="js-login"><a href="javascript:void(0);">登录</a></li>
+                #end
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div id="main">
+    <div class="container" id="daily">
+        <div class="post">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <a><img width="32" class="img-circle" src="$!{user.headUrl}"></a>
                 </div>
             </div>
-            <nav class="site-nav">
-                <ul id="menu" class="menu">
-                    <li class="menu-item menu-item-home menu-item-active">
-                        <a href="http://www.psw.life" rel="section">
-                            <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
-                            首页
-                        </a>
-                    </li>
-                    #if ($user)
-                    <li class="menu-item menu-item-archives js-login"><a href="javascript:void(0);">$!{user.name}</a></li>
-                    #else
-                    <li class="menu-item menu-item-archives js-login"><a href="javascript:void(0);">登录</a></li>
-                    #end
-                </ul>
-            </nav>
+            <div class="subject-name"><a>$!{user.name}</a></div>
+            <div class="content-main">
+                <textarea placeholder="输入留言" style="display: block;border: 0px;margin: 0px;height: 85px;width: 600px;resize: none;" maxlength="255"></textarea>
+            </div>
         </div>
-    </header>
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">×</span></button>
-            </div>
-            <div class="modal-body">
-                <h4 class="modal-title" align="center">login</h4>
-                <br/>
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-sm-offset-2 col-sm-2 control-label">账号</label>
-                        <div class="col-sm-5">
-                            <div class="control-group js-email"><input type="email" placeholder="username"></div>
+        <a class="btn btn-addmsg" href="javascript:void(0);">发布</a>
+        <div class="daily">
+        <div class="jscroll-inner">
+                <div class="posts">
+                    #foreach($vo in $vos)
+                    <div class="post">
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <a><img width="32" class="img-circle" src="$!{vo.author.headUrl}"></a>
+                            </div>
+                        </div>
+                        <div class="subject-name"><a>$!{vo.author.name}</a></div>
+                        <div class="content">
+                            <div class="content-main">
+                                <div class="meta">
+                                    $!{vo.message.text}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-offset-2 col-sm-2 control-label">密码</label>
-                        <div class="col-sm-5">
-                            <div class="control-group js-pwd"><input type="password" placeholder="请输入密码"></div>
-                        </div>
-                    </div>
-                    <div class="form-group about-pwd">
-                        <label><input type="checkbox" class="js-rember"> 记住登录</label>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-input-login">
-                            <a class="btn btn-info js-login" href="javascript:void(0);">登陆</a>
-                            <a class="btn btn-info js-register" href="javascript:void(0);">注册</a>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
+                    #end
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/main/base/base.js"></script>

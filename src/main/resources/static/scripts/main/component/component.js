@@ -90,7 +90,7 @@
     }
 
     function fForbidScroll(oEl, bForbid) {
-        $(oEl).css('overflow', bForbid === false ? 'auto' : 'hidden');
+        // $(oEl).css('overflow', bForbid === false ? 'auto' : 'hidden');
     }
 
     function fEmit(sName) {

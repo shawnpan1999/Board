@@ -1812,7 +1812,45 @@ fieldset[disabled] .btn-success.active {
   background-color: #00BC9B;
   border-color: #00BC9B;
 }
-
+.btn-mylogin {
+  display: inline-block;
+  width: 100%;
+  border: none;
+  color: #fff;
+  padding: 15px;
+  border-radius: 3px;
+  background-color: #44a0b3;
+}
+.btn-myreg {
+  display: inline-block;
+  width: 100%;
+  border: none;
+  color: #44a0b3;
+  padding: 15px;
+  border-radius: 3px;
+  background-color: #fff;
+}
+.btn-addmsg {
+  display: table-cell;
+  width: 100%;
+  border: none;
+  color: #fff;
+  padding: 15px;
+  border-radius: 0px;
+  background-color: #44a0b3;
+}
+.btn-mylogin:hover{
+  color: #fff;
+  box-shadow:0 2px 7px rgba(68, 160, 179, .5);
+}
+.btn-myreg:hover{
+  color: #44a0b3;
+  box-shadow:0 2px 7px rgba(68, 160, 179, .5);
+}
+.btn-addmsg:hover{
+  color: #fff;
+  box-shadow:0 2px 7px rgba(68, 160, 179, .5);
+}
 .btn-info:hover,
 .btn-info:focus,
 .btn-info:active,
@@ -5042,14 +5080,15 @@ a.text-#000000:hover {
 }
 /* line 2, /var/www/prod/v2.toutiao.io/app/assets/stylesheets/posts.scss */
 .post .content {
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 
 /* line 7, /var/www/prod/v2.toutiao.io/app/assets/stylesheets/posts.scss */
 .post {
-  border-bottom: 1px dashed #e3ecec;
-  padding-left: 5px;
   position: relative;
+  margin-bottom: 20px;
+  padding: 5px;
+  -webkit-box-shadow: 0 0 6px rgba(202,203,203,0.5);
 }
 /* line 12, /var/www/prod/v2.toutiao.io/app/assets/stylesheets/posts.scss */
 .post:hover .content {
@@ -5120,8 +5159,9 @@ a.text-#000000:hover {
 /* line 83, /var/www/prod/v2.toutiao.io/app/assets/stylesheets/posts.scss */
 .post .content {
   min-height: 85px;
-  margin: 4px 0 4px 50px;
-  padding: 5px 85px 10px 0;
+  margin: 4px 0 4px 0;
+  padding: 20px 85px 20px 20px;
+  /*padding: 5px 0 10px 85px;*/
 }
 .content-img {
     width: 100px;
@@ -5131,7 +5171,7 @@ a.text-#000000:hover {
     overflow: hidden;
 }
 .content-main {
-    margin-left: 120px;
+    margin-left: 0px;
 }
 /* line 89, /var/www/prod/v2.toutiao.io/app/assets/stylesheets/posts.scss */
 .post .title {
@@ -5168,7 +5208,7 @@ a.text-#000000:hover {
 }
 /* line 115, /var/www/prod/v2.toutiao.io/app/assets/stylesheets/posts.scss */
 .post .meta {
-  display: inline-block;
+  display: table-cell;
   margin-right: 10px;
   vertical-align: top;
   color: #999;
@@ -5709,7 +5749,7 @@ footer a:hover, footer a:active {
 
 /* line 91, /var/www/prod/v2.toutiao.io/app/assets/stylesheets/application.scss */
 header.navbar {
-  background: #3d444c;
+  background: #44a0b3;
   padding: 5px 0 5px 0;
   color: #FFF;
   box-shadow: 0px 1px 0px 0px rgba(83, 69, 64, 0.16), 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
@@ -5822,7 +5862,7 @@ header.navbar .navbar-toggle .icon-bar {
 
 /* line 184, /var/www/prod/v2.toutiao.io/app/assets/stylesheets/application.scss */
 .daily {
-  margin-bottom: 30px;
+  margin-top: 60px;
 }
 /* line 187, /var/www/prod/v2.toutiao.io/app/assets/stylesheets/application.scss */
 .daily h3.date {
@@ -6902,8 +6942,7 @@ header.navbar .navbar-toggle .icon-bar {
 .pop-title {
     padding: 15px 20px;
     overflow: hidden;
-    background: #f0f0f0;
-    border-radius: 4px 4px 0 0;
+    box-shadow: 0 0 25px rgba(0, 0, 0, .1);
 
 }
 .pop-title h1 {
@@ -6914,7 +6953,7 @@ header.navbar .navbar-toggle .icon-bar {
     line-height: 20px;
 }
 .pop-title h1:before {
-    background: #FF6547;
+    background: #44a0b3;
     content: "";
     display: inline-block;
     width: 7px;
@@ -6930,16 +6969,14 @@ header.navbar .navbar-toggle .icon-bar {
 }
 .pop-close {
     display: block;
-    text-indent: -9999em;
     outline: none;
     float: right;
-    width: 12px;
-    height: 12px;
-    margin-top: 4px;
-    background: url(../images/img/pop-close.png) no-repeat;
+    margin: 0px 10px 0px 0px;
+    color: #44a0b3;
+    font-weight: 700;
 }
 .pop-content {
-    padding: 20px;
+   padding: 30px 60px 30px 60px;
 }
 .pop-text-box {
     max-height: 200px;
@@ -7036,7 +7073,7 @@ header.navbar .navbar-toggle .icon-bar {
 }
 /* 错误提示icon */
 .input-icon.icon-remove-sign {
-    color: #ff5400;
+    color: #ff540070;;
 }
 /* 成功提示icon */
 .input-icon.icon-ok-sign {
@@ -7048,11 +7085,11 @@ header.navbar .navbar-toggle .icon-bar {
 .success .icon-ok-sign,
 .error .input-tip,
 .focus .input-tip {
-  display: block;
+  display: inline;
 }
 /* 提示文案默认隐藏 */
 .input-tip {
-  position: absolute;
+  position: inherit;
   left: 0;
   bottom: -16px;
     display: none;
@@ -7061,7 +7098,7 @@ header.navbar .navbar-toggle .icon-bar {
 }
 /* 错误提示文案 */
 .error .input-tip {
-    color: #ff5400;
+    color: #ff540070;
 }
 /*输入框*/
 textarea,
@@ -7069,14 +7106,15 @@ textarea,
 .input-section input[type="password"],
 .input-section input[type="email"],
 .uneditable-input {
-  border: 1px solid #d4d4d4;
-  color: #34495e;
+  border: none;
+  color: #333333bf;
   font-family: "Lato", sans-serif;
   font-size: 14px;
-  padding: 8px 5px;
-  width: 250px;
+  padding: 15px 20px;
+  width: 100%;
   border-radius: 3px;
   outline: none;
+  /*background-color: rgba(68, 160, 179, .06);*/
 }
 .control-group.focus textarea,
 .control-group.focus input[type="text"],
@@ -7127,7 +7165,8 @@ textarea[readonly] {
   margin-left: 10px;
 }
 .pop-content .about-pwd {
-    margin: 0 0 10px 125px;
+    margin: 10px 0 10px 0px;
+  float: left;
 }
 .alert-info {
     background: #dff1ed;

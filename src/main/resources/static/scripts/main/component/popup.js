@@ -14,7 +14,7 @@ var oPopup = new Popup({
         _tpl: [
             '<div class="pop-box">',
                 '<div class="pop-title">',
-                    '<a href="javascript:void(0);" class="pop-close js-close" title="关闭"></a>',
+                    '<a href="javascript:void(0);" class="pop-close js-close">关闭</a>',
                     '<h1>#{title}</h1>',
                 '</div>',
                 '<div class="pop-content">#{content}</div>',
@@ -115,7 +115,7 @@ var oPopup = new Popup({
     function fGetData(oConf) {
         var that = this;
         return {
-            title: oConf.title || '提示',
+            title: oConf.title || '登录',
             content: oConf.content
         };
     }

@@ -1,7 +1,9 @@
 package com.nuaa.shawn.demo.controller;
 
+import com.nuaa.shawn.demo.model.Message;
 import com.nuaa.shawn.demo.model.News;
 import com.nuaa.shawn.demo.model.ViewObject;
+import com.nuaa.shawn.demo.service.MessageService;
 import com.nuaa.shawn.demo.service.NewsService;
 import com.nuaa.shawn.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,10 @@ public class HomeController {
     //Controller 通过 service 调用 DAO
     @Autowired
     NewsService newsService;
-
     @Autowired
     UserService userService;
+    @Autowired
+    MessageService messageService;
 
     private List<ViewObject> getNews(int userId, int offset, int limit) {
         List<News> newsList = newsService.getLatestNews(userId, offset, limit);
@@ -44,8 +47,22 @@ public class HomeController {
         return "home";
     }
 
+    private List<ViewObject> getMessage(int offset, int limit) {
+        List<Message> messageList = messageService.getLatestMessage(offset, limit);
+
+        List<ViewObject> vos = new ArrayList<>();
+        for (Message message : messageList) {
+            ViewObject vo = new ViewObject();
+            vo.set("message", message);    //存入 message 对象
+            vo.set("author", userService.getUser(message.getAuthorId()));    //存入作者 user 对象
+            vos.add(vo);
+        }
+        return vos;
+    }
+
     @RequestMapping(path = {"/board"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String board(Model model) {
+        model.addAttribute("vos", getMessage(0, 25));
         return "board";
     }
 
