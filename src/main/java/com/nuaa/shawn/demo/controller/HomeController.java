@@ -44,6 +44,11 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping(path = {"/board"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String board(Model model) {
+        return "board";
+    }
+
     @RequestMapping(path = {"/user/{userId}/"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String userIndex(Model model, @PathVariable("userId") int userId) {
         model.addAttribute("vos", getNews(userId, 0, 10));
