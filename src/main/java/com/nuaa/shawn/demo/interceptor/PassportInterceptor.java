@@ -14,25 +14,25 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.Objects;
 
-/*【拦截器】在用户访问页面时检测用户 ticket*/
+/*【拦截器】每进一次 Controller 就把 user 设置为当前持票的用户，退出 Controller 时就清除这个 user*/
 @Component
 public class PassportInterceptor implements HandlerInterceptor {
 
     @Autowired
-    LoginTicketDAO loginTicketDAO;
+    private LoginTicketDAO loginTicketDAO;
     @Autowired
-    UserDAO userDAO;
+    private UserDAO userDAO;
     @Autowired
-    HostHolder hostHolder;
-
+    private HostHolder hostHolder;
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         String ticket = null;
         if (httpServletRequest.getCookies() != null) {
-            for (Cookie cookie: httpServletRequest.getCookies()) {
-                if (cookie.getName() == "ticket") {    //如果检测到含有 ticket，赋值给上面的 ticket 变量
+            for (Cookie cookie : httpServletRequest.getCookies()) {
+                if (cookie.getName().equals("ticket")) {    //如果检测到含有 ticket，赋值给上面的 ticket 变量
                     ticket = cookie.getValue();
                     break;
                 }
@@ -40,7 +40,7 @@ public class PassportInterceptor implements HandlerInterceptor {
         }
         //经过查找，验证一下这个 ticket 是否有效
         if (ticket != null) {
-            LoginTicket loginTicket = loginTicketDAO.selectByTicket("ticket");    //通过 DAO 在数据库中取出 ticket 实体
+            LoginTicket loginTicket = loginTicketDAO.selectByTicket(ticket);    //通过 DAO 在数据库中取出 ticket 实体
             if (loginTicket == null || loginTicket.getExpired().before(new Date()) || loginTicket.getStatus() != 0) {
                 return true;    //无效机票
             }
@@ -50,7 +50,7 @@ public class PassportInterceptor implements HandlerInterceptor {
             User user = userDAO.selectById(loginTicket.getUserId());
             hostHolder.setUser(user);
         }
-        return false;
+        return true;
     }
 
     @Override

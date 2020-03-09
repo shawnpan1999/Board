@@ -21,7 +21,7 @@ public class LogAspect {
         StringBuilder sb = new StringBuilder();
         //joinPoint.getArgs() 可以获得当前执行函数的参数，我们试着打印出来：
         for (Object obj: joinPoint.getArgs()) {
-            sb.append("args: " + obj.toString() + " ");
+            sb.append("args: ").append(obj.toString()).append(" ");
         }
         logger.info(sb.toString());
 

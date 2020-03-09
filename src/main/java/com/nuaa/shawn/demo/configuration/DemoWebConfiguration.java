@@ -1,6 +1,5 @@
 package com.nuaa.shawn.demo.configuration;
 
-import com.nuaa.shawn.demo.interceptor.LoginRequiredInterceptor;
 import com.nuaa.shawn.demo.interceptor.PassportInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,18 +9,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 /*
  * 把拦截器注册到链路中
  */
-//@Component TODO: 【待解决】如果把这个配置打开，进入项目主页会全部空白
+@Component
 public class DemoWebConfiguration extends WebMvcConfigurerAdapter {
     @Autowired
     PassportInterceptor passportInterceptor;
 
-    @Autowired
-    LoginRequiredInterceptor loginRequiredInterceptor;
+//    @Autowired
+//    LoginRequiredInterceptor loginRequiredInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(passportInterceptor);
-        registry.addInterceptor(loginRequiredInterceptor).addPathPatterns("/setting*");
+//        registry.addInterceptor(loginRequiredInterceptor).addPathPatterns("/setting*");
         super.addInterceptors(registry);
     }
 }

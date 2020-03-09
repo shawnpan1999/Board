@@ -98,6 +98,6 @@ public class UserService {
     }
 
     public void logout(String ticket) {
-        loginTicketDAO.updateStatus(ticket, 1);
+        loginTicketDAO.updateStatus(ticket, 1);    //登出只要前端传回来一个票，这里把 ticket 设置为无效即可
     }
 }

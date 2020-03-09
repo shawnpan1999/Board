@@ -2,7 +2,6 @@ package com.nuaa.shawn.demo.controller;
 
 import com.nuaa.shawn.demo.service.UserService;
 import com.nuaa.shawn.demo.util.DemoUtil;
-import com.sun.deploy.net.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +50,8 @@ public class LoginController {
     @ResponseBody
     public String login(Model model, @RequestParam("username") String username,
                       @RequestParam("password") String password,
-                      @RequestParam(value = "remember", defaultValue = "0") int rememberme) {
-
+                      @RequestParam(value = "remember", defaultValue = "0") int rememberme,
+                      HttpServletResponse response) {
         try {
             Map<String, Object> map = userService.login(username, password);
             if (map.containsKey("ticket")) {
@@ -61,6 +60,7 @@ public class LoginController {
                 if (rememberme > 0) {
                     cookie.setMaxAge(3600*24*5);
                 }
+                response.addCookie(cookie);
                 return DemoUtil.getJSONString(0, "登录成功");
             } else {
                 return DemoUtil.getJSONString(1, map);
@@ -70,11 +70,10 @@ public class LoginController {
             logger.error("登录异常" + e.getMessage());
             return DemoUtil.getJSONString(1, "登录异常");
         }
-
     }
 
-    @RequestMapping(path = {"/logout/"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String logout(@CookieValue("ticket") String ticket) {
+    @RequestMapping(path = {"/logout"}, method = {RequestMethod.GET, RequestMethod.POST})
+    public String logout(@CookieValue("ticket") String ticket) {    //这里可以直接从注解中获得 Cookie 值
         userService.logout(ticket);
         return "redirect:/";
     }
