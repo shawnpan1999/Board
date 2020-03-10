@@ -75,6 +75,6 @@ public class LoginController {
     @RequestMapping(path = {"/logout"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String logout(@CookieValue("ticket") String ticket) {    //这里可以直接从注解中获得 Cookie 值
         userService.logout(ticket);
-        return "redirect:/board";
+        return "redirect:/";
     }
 }

@@ -1,7 +1,6 @@
 package com.nuaa.shawn.demo.dao;
 
 import com.nuaa.shawn.demo.model.Message;
-import com.nuaa.shawn.demo.model.News;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

@@ -1,10 +1,7 @@
 package com.nuaa.shawn.demo.dao;
 
 import com.nuaa.shawn.demo.model.LoginTicket;
-import com.nuaa.shawn.demo.model.News;
 import org.apache.ibatis.annotations.*;
-
-import java.util.List;
 
 @Mapper
 public interface LoginTicketDAO {

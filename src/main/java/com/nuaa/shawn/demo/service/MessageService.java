@@ -2,9 +2,6 @@ package com.nuaa.shawn.demo.service;
 
 import com.nuaa.shawn.demo.dao.MessageDAO;
 import com.nuaa.shawn.demo.model.Message;
-import com.nuaa.shawn.demo.model.News;
-import com.nuaa.shawn.demo.model.User;
-import com.nuaa.shawn.demo.util.DemoUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -20,10 +20,10 @@ public class AddMessageInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         if (hostHolder.getUser() == null) {    //拦截未登录用户
-            httpServletResponse.sendRedirect("/board");
+            httpServletResponse.sendRedirect("/");
             return false;
         } else if (hostHolder.getUser().getId() != Integer.parseInt(httpServletRequest.getParameter("authorId"))) {    //拦截不符合当前登录用户
-            httpServletResponse.sendRedirect("/board");
+            httpServletResponse.sendRedirect("/");
             return false;
         }
         return true;

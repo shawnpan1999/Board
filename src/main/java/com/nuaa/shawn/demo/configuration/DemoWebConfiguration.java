@@ -22,7 +22,7 @@ public class DemoWebConfiguration extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         //！！！拦截器注册的顺序一定要注意！
         registry.addInterceptor(passportInterceptor);
-        registry.addInterceptor(addMessageInterceptor).addPathPatterns("/board/addmsg*");
+        registry.addInterceptor(addMessageInterceptor).addPathPatterns("/addmsg*");
         super.addInterceptors(registry);
     }
 }

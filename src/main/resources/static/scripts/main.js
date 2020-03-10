@@ -7,7 +7,7 @@ $(function () {
             return;
         }
         $.ajax({
-            url: '/board/addmsg/',
+            url: '/addmsg/',
             type: 'post',
             dataType: 'json',
             data: {
