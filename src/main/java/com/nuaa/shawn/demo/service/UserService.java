@@ -51,7 +51,7 @@ public class UserService {
         user = new User();
         user.setName(username);
         user.setSalt(UUID.randomUUID().toString().substring(0, 5));
-        String head = String.format("http://images.nowcoder.com/head/%dt.png", new Random().nextInt(1000));
+        String head = String.format("http://psw.life/imgCloud/img/defaultHead.png");
         user.setHeadUrl(head);
         user.setPassword(DemoUtil.MD5(password+user.getSalt()));
         userDAO.addUser(user);

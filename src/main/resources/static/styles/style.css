@@ -37,7 +37,7 @@ a {
 
 a:hover,
 a:focus {
-  color: #141719;
+  /*color: #141719;*/
   text-decoration: none;
 }
 
@@ -889,7 +889,6 @@ body {
 @media (min-width: 768px) {
   .app-aside,
   .navbar-header {
-    width: 200px;
   }
   .navbar-collapse,
   .app-content,
@@ -1664,6 +1663,7 @@ body {
   font-weight: 500;
   border-radius: 2px;
   outline: 0!important;
+  -webkit-transition: all 0.30s ease-in-out;
 }
 
 .btn-link {
@@ -1839,17 +1839,27 @@ fieldset[disabled] .btn-success.active {
   border-radius: 0px;
   background-color: #44a0b3;
 }
+.btn-addmsg:hover {
+  color: #44a0b3;
+  background-color: #fff;
+  box-shadow:0 2px 7px rgba(68, 160, 179, .5);
+}
+.btn-addmsg:focus {
+  color: #44a0b3;
+}
 .btn-mylogin:hover{
   color: #fff;
   box-shadow:0 2px 7px rgba(68, 160, 179, .5);
+}
+.btn-mylogin:focus {
+  color: #fff;
 }
 .btn-myreg:hover{
   color: #44a0b3;
   box-shadow:0 2px 7px rgba(68, 160, 179, .5);
 }
-.btn-addmsg:hover{
-  color: #fff;
-  box-shadow:0 2px 7px rgba(68, 160, 179, .5);
+.btn-myreg:focus {
+  color: #44a0b3;
 }
 .btn-info:hover,
 .btn-info:focus,
@@ -5212,6 +5222,8 @@ a.text-#000000:hover {
   margin-right: 10px;
   vertical-align: top;
   color: #999;
+  word-break: break-all;
+  text-align: left;
 }
 /* line 121, /var/www/prod/v2.toutiao.io/app/assets/stylesheets/posts.scss */
 .post .meta a {
@@ -5760,7 +5772,6 @@ header.navbar .navbar-brand {
   height: 55px;
   margin-left: 5px;
   margin-top: 5px;
-  padding: 5px 5px 5px 60px;
   /*background: url(/assets/logo-cf19f42eba7cd98c38a46a158aef1cd5.png) no-repeat 0 4px;*/
   background-size: 46px 46px;
   text-decoration: none;

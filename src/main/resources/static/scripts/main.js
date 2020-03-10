@@ -2,7 +2,10 @@ $(function () {
     $(".btn-addmsg").click(function () {
         var msg;
         msg = $("#inputMsg").val();
-        alert("id = " + userId + "| text = " + msg);
+        if (!(userId > 1)) {
+            alert('请先登录！');
+            return;
+        }
         $.ajax({
             url: '/board/addmsg/',
             type: 'post',
@@ -18,7 +21,7 @@ $(function () {
                 alert(oResult.msgerr);
             }
         }).fail(function () {
-            alert('出现错误，请重试');
+            alert('留言失败，请重试');
         });
     })
 });

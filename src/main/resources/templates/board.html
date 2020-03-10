@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -27,7 +27,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class=""><a href="http://www.psw.life">主页</a></li>
                 #if ($user)
-                <li class="js-login"><a href="javascript:void(0);">$!{user.name}</a></li>
+                <li><a>$!{user.name}</a></li>
+                <li><a href="/logout">退出</a></li>
                 #else
                 <li class="js-login"><a href="javascript:void(0);">登录</a></li>
                 #end
