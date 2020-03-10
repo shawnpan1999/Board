@@ -17,7 +17,7 @@ public interface MessageDAO {
     String ORDER_BY = " id ";
 
     @Insert({"insert into ", TABLE_NAME, "(", INSERT_FIELDS,
-            ") values (#{author_id},#{created_date},#{text})"})
+            ") values (#{authorId},#{createdDate},#{text})"})
     int addMessage(Message message);
 
     @Select({"select", SELECT_FIELDS, "from", TABLE_NAME, "order by", ORDER_BY, "desc limit #{offset},#{limit}"})

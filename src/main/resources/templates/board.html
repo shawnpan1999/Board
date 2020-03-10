@@ -9,7 +9,6 @@
     <link rel="stylesheet" media="all" href="/styles/style.css">
 <!--    <script type="text/javascript" src="scripts/jquery-1.12.4.min.js"></script>-->
 <!--    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>-->
-<!--    <script type="text/javascript" src="scripts/main.js"></script>-->
 
 </head>
 <body>
@@ -47,7 +46,7 @@
             </div>
             <div class="subject-name"><a>$!{user.name}</a></div>
             <div class="content-main">
-                <textarea placeholder="输入留言" style="display: block;border: 0px;margin: 0px;height: 85px;width: 600px;resize: none;" maxlength="255"></textarea>
+                <textarea id="inputMsg" placeholder="输入留言" style="display: block;border: 0px;margin: 0px;height: 85px;width: 600px;resize: none;" maxlength="255"></textarea>
             </div>
         </div>
         <a class="btn btn-addmsg" href="javascript:void(0);">发布</a>
@@ -78,13 +77,18 @@
 </div>
 
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
-    <script type="text/javascript" src="/scripts/main/base/base.js"></script>
-    <script type="text/javascript" src="/scripts/main/base/util.js"></script>
-    <script type="text/javascript" src="/scripts/main/base/event.js"></script>
-    <script type="text/javascript" src="/scripts/main/component/component.js"></script>
-    <script type="text/javascript" src="/scripts/main/component/popup.js"></script>
-    <script type="text/javascript" src="/scripts/main/component/popupLogin.js"></script>
-    <script type="text/javascript" src="/scripts/main/site/home.js"></script>
+<script type="text/javascript" src="/scripts/jquery.js"></script>
+<script type="text/javascript" src="/scripts/main/base/base.js"></script>
+<script type="text/javascript" src="/scripts/main/base/util.js"></script>
+<script type="text/javascript" src="/scripts/main/base/event.js"></script>
+<script type="text/javascript" src="/scripts/main/component/component.js"></script>
+<script type="text/javascript" src="/scripts/main/component/popup.js"></script>
+<script type="text/javascript" src="/scripts/main/component/popupLogin.js"></script>
+<script type="text/javascript" src="/scripts/main/site/home.js"></script>
+<script type="text/javascript" src="scripts/main.js"></script>
+<script>
+    var userId;
+    userId = '$!{user.id}';
+</script>
 </body>
 </html>

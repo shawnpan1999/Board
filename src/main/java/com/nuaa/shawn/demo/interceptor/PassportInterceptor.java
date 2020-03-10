@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Objects;
 
-/*【拦截器】每进一次 Controller 就把 user 设置为当前持票的用户，退出 Controller 时就清除这个 user*/
+/*【拦截器】每进一次 Controller 前就把 user 设置为当前持票的用户，结束时就清除这个 user*/
+//执行过程： preHandle -> Controller -> postHandle -> View -> afterCompletion
 @Component
 public class PassportInterceptor implements HandlerInterceptor {
 

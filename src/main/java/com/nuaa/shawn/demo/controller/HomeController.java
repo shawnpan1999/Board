@@ -6,19 +6,23 @@ import com.nuaa.shawn.demo.model.ViewObject;
 import com.nuaa.shawn.demo.service.MessageService;
 import com.nuaa.shawn.demo.service.NewsService;
 import com.nuaa.shawn.demo.service.UserService;
+import com.nuaa.shawn.demo.util.DemoUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HomeController {
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
     //Controller 通过 service 调用 DAO
     @Autowired
     NewsService newsService;
@@ -58,6 +62,25 @@ public class HomeController {
             vos.add(vo);
         }
         return vos;
+    }
+
+    @RequestMapping(path = {"/board/addmsg"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public String addMessage(Model model, @RequestParam("authorId") int authorId,
+                      @RequestParam("text") String text,
+                      HttpServletResponse response) {
+        try {
+            Map<String, Object> map = messageService.addMessage(authorId, text);    //map 是 service 层处理注册信息返回的结果
+            if (map.containsKey("success")) {
+                return DemoUtil.getJSONString(0, "留言成功");
+            } else {
+                return DemoUtil.getJSONString(1, map);
+            }
+
+        } catch (Exception e) {
+            logger.error("留言异常" + e.getMessage());
+            return DemoUtil.getJSONString(1, "留言异常");
+        }
     }
 
     @RequestMapping(path = {"/board"}, method = {RequestMethod.GET, RequestMethod.POST})

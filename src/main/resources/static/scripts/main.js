@@ -1,6 +1,24 @@
-//登录按钮显示登录框
-// $(function () {
-//     $("#loginButton").click(function () {
-//         $('#myModal').modal('show');    //显示 bootstrap 动态模板框插件
-//     })
-// });
+$(function () {
+    $(".btn-addmsg").click(function () {
+        var msg;
+        msg = $("#inputMsg").val();
+        alert("id = " + userId + "| text = " + msg);
+        $.ajax({
+            url: '/board/addmsg/',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                authorId: userId,
+                text: msg,
+            }
+        }).done(function (oResult) {
+            if (oResult.code === 0) {
+                window.location.reload();
+            } else {
+                alert(oResult.msgerr);
+            }
+        }).fail(function () {
+            alert('出现错误，请重试');
+        });
+    })
+});
