@@ -33,3 +33,5 @@ build/
 
 ### Config ###
 src/main/resources/application.properties
+mvnw
+mvnw.cmd
