@@ -42,10 +42,18 @@
         <div class="post">
             <div class="user-info">
                 <div class="user-avatar">
+                    #if ($user)
                     <a><img width="32" class="img-circle" src="$!{user.headUrl}"></a>
+                    #else
+                    <a><img width="32" class="img-circle" src="http://www.psw.life/imgCloud/img/defaultHead.png"></a>
+                    #end
                 </div>
             </div>
+            #if ($user)
             <div class="subject-name"><a>$!{user.name}</a></div>
+            #else
+            <div class="subject-name"><a>未登录</a></div>
+            #end
             <div class="content-main">
                 <textarea id="inputMsg" placeholder="输入留言" style="display: block;border: 0px;margin: 0px;height: 85px;width: 600px;resize: none;" maxlength="255"></textarea>
             </div>
