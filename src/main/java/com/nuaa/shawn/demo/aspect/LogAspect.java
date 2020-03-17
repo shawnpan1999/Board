@@ -17,14 +17,11 @@ public class LogAspect {
     //括号里是正则表达式，Before/After 表示符合正则表达式的函数执行 前/后 都会执行一次下面的方法
     @Before("execution(* com.nuaa.shawn.demo.controller.*Controller.*(..))")
     public void beforeMethod(JoinPoint joinPoint) {
-        logger.info("Before method:");
         StringBuilder sb = new StringBuilder();
-        //joinPoint.getArgs() 可以获得当前执行函数的参数，我们试着打印出来：
-        for (Object obj: joinPoint.getArgs()) {
-            sb.append("args: ").append(obj.toString()).append(" ");
+        for (Object arg : joinPoint.getArgs()) {
+            sb.append("arg:" + arg.toString() + "|");
         }
-        logger.info(sb.toString());
-
+        logger.info("before method: " + sb.toString());
     }
     @After("execution(* com.nuaa.shawn.demo.controller.*Controller.*(..))")
     public void afterMethod() {

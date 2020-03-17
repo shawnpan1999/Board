@@ -2,6 +2,8 @@ package com.nuaa.shawn.demo.model;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 
 @Component
 public class HostHolder {

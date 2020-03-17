@@ -58,26 +58,61 @@
                 <textarea id="inputMsg" placeholder="输入留言" style="display: block;border: 0px;margin: 0px;height: 85px;width: 600px;resize: none;" maxlength="255"></textarea>
             </div>
         </div>
-        <a class="btn btn-addmsg" href="javascript:void(0);">发布</a>
+        <a class="btn btn-addblog" href="javascript:void(0);">发布</a>
         <div class="daily">
         <div class="jscroll-inner">
                 <div class="posts">
                     #foreach($vo in $vos)
-                    <div class="post">
-                        <div class="user-info">
-                            <div class="user-avatar">
-                                <a><img width="32" class="img-circle" src="$!{vo.author.headUrl}"></a>
-                            </div>
-                        </div>
-                        <div class="subject-name"><a>$!{vo.author.name}</a></div>
-                        <div class="content">
-                            <div class="content-main">
-                                <div class="meta">
-                                    $!{vo.message.text}
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a>
+                                        <img src="$!{vo.author.headUrl}"
+                                             style="width:100px;height:100px" alt="">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <div>
+                                        <a href="" style="font-size: 25px">
+                                        $!{vo.author.name}
+                                        </a>
+                                    </div>
+                                    <div class="grey-font">
+                                        $!{vo.blog.createdDate}
+                                            <a id="delete-blog" class="cursor-pointer grey-font">delete</a>
+                                    </div>
+                                    <div>
+                                        $!{vo.blog.text}
+                                    </div>
+                                    <div>
+                                        <a href="" style="font-size: 14px">
+                                            #if ($vo.likestatus == 1)
+                                            已赞 ($!{vo.blog.likeCount})
+                                            #else
+                                            赞 ($!{vo.blog.likeCount})
+                                            #end
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+<!--                    <div class="post">-->
+<!--                        <div class="user-info">-->
+<!--                            <div class="user-avatar">-->
+<!--                                <a><img width="32" class="img-circle" src="$!{vo.author.headUrl}"></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="subject-name"><a>$!{vo.author.name}</a></div>-->
+<!--                        <div class="content">-->
+<!--                            <div class="content-main">-->
+<!--                                <div class="meta">-->
+<!--                                    $!{vo.blog.text}-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     #end
                 </div>
             </div>

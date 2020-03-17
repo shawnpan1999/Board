@@ -1,5 +1,5 @@
 $(function () {
-    $(".btn-addmsg").click(function () {
+    $(".btn-addblog").click(function () {
         var msg;
         msg = $("#inputMsg").val();
         if (!(userId > 1)) {
@@ -7,7 +7,7 @@ $(function () {
             return;
         }
         $.ajax({
-            url: '/addmsg/',
+            url: '/addblog/',
             type: 'post',
             dataType: 'json',
             data: {
