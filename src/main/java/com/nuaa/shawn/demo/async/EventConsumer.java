@@ -61,7 +61,7 @@ public class EventConsumer implements InitializingBean, ApplicationContextAware 
                             continue;
                         }
                         EventModel eventModel = JSON.parseObject(message, EventModel.class);    //转换成 EventModel
-                        if (!config.containsKey(eventModel.getType())) {    //如果 cinfig 没有，则报错
+                        if (!config.containsKey(eventModel.getType())) {    //如果 config 没有，则报错
                             logger.error("不能识别的事件");
                             continue;
                         }

@@ -3,13 +3,14 @@ package com.nuaa.shawn.demo.model;
 import java.util.Date;
 
 public class Message {
-    private int id;
-    private int fromId;
-    private int toId;
-    private String content;
-    private Date createdDate;
-    private int hasRead;
-    private String conversationId;    //用于标记同一个对话，命名规范是 id1_id2 ，为from和to两个id连接，小的排在前面
+    private int id;                   //消息id
+    private int msgType;              //消息类型：LIKE 被点赞、COMMENT 被评论、DIALOG 收到私信
+    private int fromId;               //消息来自
+    private int toId;                 //消息发送至
+    private String content;           //消息内容
+    private Date createdDate;         //消息日期
+    private int hasRead;              //是否已读(接收方已读)
+    private String conversationId;    //仅在 type==DIALOG 时有效；用于标记同一个私信对话，命名规范是 id1_id2 ，为from和to两个id连接，较小者排在前面
 
     public int getId() {
         return id;
@@ -17,6 +18,14 @@ public class Message {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getMsgType() {
+        return msgType;
+    }
+
+    public void setMsgType(int msg_type) {
+        this.msgType = msg_type;
     }
 
     public int getFromId() {

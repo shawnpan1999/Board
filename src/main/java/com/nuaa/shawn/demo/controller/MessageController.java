@@ -1,5 +1,6 @@
 package com.nuaa.shawn.demo.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.nuaa.shawn.demo.model.*;
 import com.nuaa.shawn.demo.service.MessageService;
 import com.nuaa.shawn.demo.service.UserService;
@@ -36,21 +37,33 @@ public class MessageController {
     HostHolder hostHolder;
 
     @RequestMapping(path = {"/msg/list"}, method = {RequestMethod.GET})
-    public String conversationDetail(Model model) {
+    public String getMessageList(Model model) {
         try {
+//            int localUserId = hostHolder.getUser().getId();
+//            List<ViewObject> conversations = new ArrayList<ViewObject>();
+//            List<Message> conversationList = messageService.getMessageList(localUserId, 0, 10);
+//            for (Message msg : conversationList) {
+//                ViewObject vo = new ViewObject();
+//                vo.set("conversation", msg);
+//                int targetId = msg.getFromId() == localUserId ? msg.getToId() : msg.getFromId();
+//                User user = userService.getUser(targetId);
+//                vo.set("user", user);
+//                vo.set("unread", messageService.getConvesationUnreadCount(localUserId, msg.getConversationId()));
+//                conversations.add(vo);
+//            }
+//            model.addAttribute("conversations", conversations);
             int localUserId = hostHolder.getUser().getId();
-            List<ViewObject> conversations = new ArrayList<ViewObject>();
-            List<Message> conversationList = messageService.getConversationList(localUserId, 0, 10);
-            for (Message msg : conversationList) {
+            List<ViewObject> vos = new ArrayList<ViewObject>();
+            List<Message> messageList = messageService.getMessageList(localUserId, 0, 10);  //这个limit功能还没实现
+            for (Message msg : messageList) {
                 ViewObject vo = new ViewObject();
-                vo.set("conversation", msg);
-                int targetId = msg.getFromId() == localUserId ? msg.getToId() : msg.getFromId();
-                User user = userService.getUser(targetId);
-                vo.set("user", user);
-                vo.set("unread", messageService.getConvesationUnreadCount(localUserId, msg.getConversationId()));
-                conversations.add(vo);
+                vo.set("message", msg);
+                User fromUser = userService.getUser(msg.getFromId());
+                vo.set("fromUser", fromUser);
+                vo.set("unread", messageService.getMessageUnreadCount(localUserId, msg.getMsgType(), msg.getConversationId()));
+                vos.add(vo);
             }
-            model.addAttribute("conversations", conversations);
+            model.addAttribute("msgs", vos);
         } catch (Exception e) {
             logger.error("获取消息列表失败" + e.getMessage());
         }
@@ -71,12 +84,12 @@ public class MessageController {
             for (Message msg : conversationList) {
                 ViewObject vo = new ViewObject();
                 vo.set("message", msg);
-                User user = userService.getUser(msg.getFromId());
-                if (user == null) {
+                User fromUser = userService.getUser(msg.getFromId());
+                if (fromUser == null) {
                     continue;
                 }
-                vo.set("headUrl", user.getHeadUrl());
-                vo.set("userId", user.getId());
+                vo.set("headUrl", fromUser.getHeadUrl());
+                vo.set("userId", fromUser.getId());
                 messages.add(vo);
             }
             model.addAttribute("messages", messages);
@@ -89,11 +102,13 @@ public class MessageController {
 
     @RequestMapping(path = {"/msg/addMessage"}, method = {RequestMethod.POST})
     @ResponseBody
-    public String addMessage(@RequestParam("fromId") int fromId,
+    public String addMessage(@RequestParam("msgType") int msgType,
+                             @RequestParam("fromId") int fromId,
                              @RequestParam("toId") int toId,
                              @RequestParam("content") String content) {
         try {
             Message msg = new Message();
+            msg.setMsgType(msgType);
             msg.setContent(content);
             msg.setFromId(fromId);
             msg.setToId(toId);

@@ -21,6 +21,8 @@ CREATE TABLE `blog` (
                            `author_id` int(11) NOT NULL,
                            `created_date` datetime DEFAULT NULL,
                            `text` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+                           `like_count` int NOT NULL DEFAULT 0,
+                           `comment_count` int NOT NULL DEFAULT 0,
                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
@@ -48,6 +50,7 @@ insert  into `user`(`id`,`name`,`password`,`salt`,`head_url`) values (13,'admin'
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (
                            `id` INT NOT NULL AUTO_INCREMENT,
+                           `msg_type` INT(1) NOT NULL,
                            `from_id` INT NULL,
                            `to_id` INT NULL,
                            `content` TEXT NULL,
