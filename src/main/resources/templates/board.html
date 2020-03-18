@@ -88,9 +88,9 @@
                                     <div>
                                         <a href="" style="font-size: 14px">
                                             #if ($vo.likestatus == 1)
-                                            已赞 ($!{vo.blog.likeCount})
+                                            <a href="/dislike?blogId=$!{vo.blog.id}">已赞 ($!{vo.blog.likeCount})</a>
                                             #else
-                                            赞 ($!{vo.blog.likeCount})
+                                            <a href="/like?blogId=$!{vo.blog.id}">赞 ($!{vo.blog.likeCount})</a>
                                             #end
                                         </a>
                                     </div>

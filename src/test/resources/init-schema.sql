@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS `login_ticket`;
-
 CREATE TABLE `login_ticket` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT,
                                 `user_id` int(11) NOT NULL,
@@ -17,7 +16,6 @@ insert  into `login_ticket`(`id`,`user_id`,`ticket`,`expired`,`status`) values (
 /*Table structure for table `blog` */
 
 DROP TABLE IF EXISTS `blog`;
-
 CREATE TABLE `blog` (
                            `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                            `author_id` int(11) NOT NULL,
@@ -33,7 +31,6 @@ insert  into `blog`(`id`,`author_id`,`created_date`,`text`) values (9,14,'2020-0
 /*Table structure for table `user` */
 
 DROP TABLE IF EXISTS `user`;
-
 CREATE TABLE `user` (
                         `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                         `name` varchar(64) NOT NULL DEFAULT '',
@@ -47,3 +44,17 @@ CREATE TABLE `user` (
 /*Data for the table `user` */
 
 insert  into `user`(`id`,`name`,`password`,`salt`,`head_url`) values (13,'admin','9D1813AAFF5C190E62A163558E74AA8A','c343d','http://www.psw.life/imgCloud/img/avatar.jpg'),(14,'admin2','3C81E070AB852334A04E70BCC8561E5A','65f5d','http://psw.life/imgCloud/img/defaultHead.png');
+
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE `message` (
+                           `id` INT NOT NULL AUTO_INCREMENT,
+                           `from_id` INT NULL,
+                           `to_id` INT NULL,
+                           `content` TEXT NULL,
+                           `created_date` DATETIME NULL,
+                           `has_read` INT NULL,
+                           `conversation_id` VARCHAR(45) NOT NULL,
+                           PRIMARY KEY (`id`),
+                           INDEX `conversation_index` (`conversation_id` ASC),
+                           INDEX `created_date` (`created_date` ASC)
+) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;

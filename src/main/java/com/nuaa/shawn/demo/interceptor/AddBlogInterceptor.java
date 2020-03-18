@@ -9,11 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/*添加留言的拦截器，只注册在 /addmsg 页面，用于拦截未登录用户添加留言
+/*添加文章的拦截器，只注册在 /addblog 页面，用于拦截未登录用户添加留言
 * */
 
 @Component
-public class AddMessageInterceptor implements HandlerInterceptor {
+public class AddBlogInterceptor implements HandlerInterceptor {
     @Autowired
     private HostHolder hostHolder;
 

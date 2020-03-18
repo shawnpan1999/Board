@@ -5,7 +5,6 @@ import com.nuaa.shawn.demo.async.EventModel;
 import com.nuaa.shawn.demo.async.EventType;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 

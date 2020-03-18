@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * Created by nowcoder on 2016/7/13.
- */
 @Controller
 public class LikeController {
     @Autowired
@@ -45,7 +42,8 @@ public class LikeController {
         eventProducer.fireEvent(new EventModel(EventType.LIKE)
                                 .setEntityOwnerId(blog.getAuthorId())
                                 .setActorId(hostHolder.getUser().getId())
-                                .setEntityId(blogId));
+                                .setEntityId(blogId)
+                                .setEntityType(EntityType.ENTITY_BLOG));
         /** 这样就可以避免写大量(各种参数组合的)构造函数了 */
         return DemoUtil.getJSONString(0, String.valueOf(likeCount));
     }
