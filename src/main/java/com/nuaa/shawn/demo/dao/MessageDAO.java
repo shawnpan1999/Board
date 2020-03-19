@@ -24,7 +24,6 @@ public interface MessageDAO {
     List<Message> getConversationDetail(@Param("conversationId") String conversationId,
                                         @Param("offset") int offset, @Param("limit") int limit);
 
-    //TODO: 按照type对应不同查询的操作
     int getMessageUnreadCount(@Param("userId") int userId, @Param("msgType") int msgType, @Param("conversationId") String conversationId);
 
     //获取消息列表，其中赞和评论合并为一条消息，私信对话按 conversation_id 合并
