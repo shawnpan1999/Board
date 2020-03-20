@@ -18,7 +18,6 @@ public class JedisAdapter implements InitializingBean {
     private static final Logger logger = LoggerFactory.getLogger(JedisAdapter.class);
 
     private JedisPool pool = null;
-    public static String REDIS_BLOGLIST_KEY = "blogList";
 
     @Override   /** 加载完毕后进行初始化 */
     public void afterPropertiesSet() throws Exception {
@@ -34,7 +33,7 @@ public class JedisAdapter implements InitializingBean {
         Jedis jedis = null;
         try {
             jedis = pool.getResource();
-            return getJedis().get(key);
+            return jedis.get(key);
         } catch (Exception e) {
             logger.error("发生异常" + e.getMessage());
             return null;
@@ -104,6 +103,7 @@ public class JedisAdapter implements InitializingBean {
         }
     }
 
+    //返回集合中元素的数量
     public long scard(String key) {
         Jedis jedis = null;
         try {
@@ -171,6 +171,21 @@ public class JedisAdapter implements InitializingBean {
             jedis.hmset(key, map);
         } catch (Exception e) {
             logger.error("发生异常" + e.getMessage());
+        } finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+        }
+    }
+
+    public List<String> hvals(String key) {    //获取hash所有值
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.hvals(key);
+        } catch (Exception e) {
+            logger.error("发生异常" + e.getMessage());
+            return null;
         } finally {
             if (jedis != null) {
                 jedis.close();

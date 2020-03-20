@@ -33,17 +33,16 @@ public class LikeController {
     @RequestMapping(path = {"/like"}, method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public String like(@Param("blogId") int blogId) {
+        //把喜欢的用户写进 redis 里
         long likeCount = likeService.like(hostHolder.getUser().getId(), EntityType.ENTITY_BLOG, blogId);
         // 更新喜欢数
-        Blog blog = blogService.getById(blogId);
-        blogService.updateLikeCount(blogId, (int) likeCount);   //更新喜欢数据
         /** 这边是一个骚操作，eventProducer每个setter方法都返回了自己(return this;)，因此可以一直.一直.来set整个eventProducer */
         //记录现场(EventModel)，发射到队列中
         eventProducer.fireEvent(new EventModel(EventType.LIKE)
-                                .setEntityOwnerId(blog.getAuthorId())
                                 .setActorId(hostHolder.getUser().getId())
                                 .setEntityId(blogId)
-                                .setEntityType(EntityType.ENTITY_BLOG));
+                                .setEntityType(EntityType.ENTITY_BLOG)
+                                .setExt("likeCount", String.valueOf(likeCount)));
         /** 这样就可以避免写大量(各种参数组合的)构造函数了 */
         return DemoUtil.getJSONString(0, String.valueOf(likeCount));
     }

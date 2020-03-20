@@ -33,7 +33,7 @@ public class HomeController {
     @Autowired
     LikeService likeService;
 
-    private List<ViewObject> getBlog(int offset, int limit) {
+    private List<ViewObject> getBlogs(int offset, int limit) {
         List<Blog> blogList = blogService.getLatestBlog(offset, limit);
         int localUserId = hostHolder.getUser() != null ? hostHolder.getUser().getId() : 0;
 
@@ -54,7 +54,7 @@ public class HomeController {
 
     @RequestMapping(path = {"/"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String board(Model model) {
-        model.addAttribute("vos", getBlog(0, 25));
+        model.addAttribute("vos", getBlogs(0, 25));
         return "board";
     }
 

@@ -1,5 +1,6 @@
 package com.nuaa.shawn.demo.service;
 
+import com.nuaa.shawn.demo.dao.BlogCacheDAO;
 import com.nuaa.shawn.demo.dao.BlogDAO;
 import com.nuaa.shawn.demo.model.Blog;
 import org.apache.commons.lang.StringUtils;
@@ -12,9 +13,12 @@ import java.util.*;
 public class BlogService {
     @Autowired
     private BlogDAO blogDAO;
+    @Autowired
+    private BlogCacheDAO blogCacheDAO;
 
     public List<Blog> getLatestBlog(int offset, int limit) {
-        return blogDAO.selectByOffset(offset, limit);
+//        return blogDAO.selectByOffset(offset, limit); //从数据库拿数据
+        return blogCacheDAO.getBlogsByOffset(offset, limit);    //从 redis 拿数据
     }
 
     public Blog getById(int newsId) {

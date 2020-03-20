@@ -1,6 +1,7 @@
 package com.nuaa.shawn.demo;
 
 import com.alibaba.fastjson.JSONObject;
+import com.nuaa.shawn.demo.dao.BlogCacheDAO;
 import com.nuaa.shawn.demo.model.Blog;
 import com.nuaa.shawn.demo.service.BlogService;
 import com.nuaa.shawn.demo.util.JedisAdapter;
@@ -8,7 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.HashMap;
@@ -31,7 +31,7 @@ public class InitDatabaseTests {
         for (Blog blog : blogList) {
             blogMap.put(String.valueOf(blog.getId()), JSONObject.toJSONString(blog));
         }
-        jedisAdapter.hmset(JedisAdapter.REDIS_BLOGLIST_KEY, blogMap);
+        jedisAdapter.hmset(BlogCacheDAO.BLOGLIST_KEY, blogMap);
         System.out.println("Done.");
     }
 }
