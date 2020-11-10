@@ -2,10 +2,6 @@
 
 一个基于 Spring Boot 的留言板 demo。
 
-[演示地址](http://118.178.95.33:8080/)
-
-
-
 ## 项目配置
 
 在 [Spring Initializr](https://start.spring.io/) 上创建项目，使用 IDEA 打开：
